@@ -1,0 +1,50 @@
+{
+  "common": {
+    "search": "Search",
+    "search_placeholder": "Search documentation...",
+    "no_results": "No results found",
+    "edit_page": "Edit this page on GitHub",
+    "last_updated": "Last updated",
+    "version": "Version",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "table_of_contents": "Table of Contents",
+    "feedback": "Feedback",
+    "feedback_placeholder": "Share your feedback...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "success": "Success",
+    "error": "Error",
+    "copy_code": "Copy code",
+    "copied": "Copied!",
+    "previous": "Previous",
+    "next": "Next",
+    "home": "Home",
+    "documentation": "Documentation",
+    "api_reference": "API Reference",
+    "getting_started": "Getting Started",
+    "introduction": "Introduction",
+    "installation": "Installation",
+    "configuration": "Configuration"
+  },
+  "feedback": {
+    "title": "Was this page helpful?",
+    "yes": "Yes",
+    "no": "No",
+    "thank_you": "Thank you for your feedback!",
+    "message": "Your feedback helps us improve the documentation."
+  },
+  "search": {
+    "recent": "Recent searches",
+    "suggestions": "Suggestions",
+    "no_recent": "No recent searches"
+  },
+  "navigation": {
+    "menu": "Menu",
+    "close": "Close",
+    "toggle_sidebar": "Toggle sidebar"
+  }
+}
