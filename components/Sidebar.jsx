@@ -24,7 +24,9 @@ export default function Sidebar({ isOpen, currentVersion = 'v1', currentSlug }) 
   const { t } = useTranslation('common');
   const { locale } = router;
 
-  const items = navItems[currentVersion] || navItems.v1;
+  // For API reference, use v3 navigation items; for doc versions, use the specific version
+  const displayVersion = currentVersion === 'api' ? 'v3' : currentVersion;
+  const items = navItems[displayVersion] || navItems.v1;
 
   return (
     <>
@@ -54,16 +56,20 @@ export default function Sidebar({ isOpen, currentVersion = 'v1', currentSlug }) 
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
               <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
-                Getting Started
+                {currentVersion === 'api' ? 'Documentation' : 'Getting Started'}
               </h3>
             </div>
             <ul className="space-y-1">
               {items.map((item) => {
                 const isActive = currentSlug === item.slug;
+                // For API reference, link to v3 docs; for doc versions, link within version
+                const href = currentVersion === 'api' 
+                  ? `/docs/v3/${item.slug}` 
+                  : `/docs/${currentVersion}/${item.slug}`;
                 return (
                   <li key={item.slug}>
                     <Link
-                      href={`/docs/${currentVersion}/${item.slug}`}
+                      href={href}
                       locale={locale}
                       data-testid={`sidebar-nav-link-${item.slug}`}
                       className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm transition-all ${

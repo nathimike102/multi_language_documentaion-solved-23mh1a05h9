@@ -11,11 +11,11 @@ Esta versión ofrece una gama de características avanzadas para desarrolladores
 La API se ha ampliado para ofrecer más flexibilidad y control.
 
 ```javascript
-import { advancedAPI } from '@example/library';
+import { advancedAPI } from "@example/library";
 
 const result = advancedAPI.process({
   option1: true,
-  option2: 'valor'
+  option2: "valor",
 });
 ```
 
