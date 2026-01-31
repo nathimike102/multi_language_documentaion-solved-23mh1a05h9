@@ -4,16 +4,16 @@ A high-performance, multi-language documentation portal built with Next.js featu
 
 ## Features
 
-- ⚡ **Incremental Static Regeneration (ISR)** - Fast page loads with 60-second revalidation
-- 🌍 **Multi-language Support** - English, Spanish, French, and German
-- 🔍 **Full-text Search** - Client-side search powered by FlexSearch
-- 🎨 **Dark Mode** - System-aware theme switching
-- 📚 **Version Control** - Switch between v1, v2, and v3 documentation
-- 📖 **API Reference** - Interactive Swagger UI documentation
-- 💬 **Feedback Widget** - Collect user feedback on documentation
-- 📑 **Table of Contents** - Auto-generated with scroll tracking
-- 💻 **Code Blocks** - Syntax highlighting with copy-to-clipboard
-- 🐳 **Docker Support** - Fully containerized for easy deployment
+- **Incremental Static Regeneration (ISR)** - Fast page loads with 60-second revalidation
+- **Multi-language Support** - English, Spanish, French, and German
+- **Full-text Search** - Client-side search powered by FlexSearch
+- **Dark Mode** - System-aware theme switching
+- **Version Control** - Switch between v1, v2, and v3 documentation
+- **API Reference** - Interactive Swagger UI documentation
+- **Feedback Widget** - Collect user feedback on documentation
+- **Table of Contents** - Auto-generated with scroll tracking
+- **Code Blocks** - Syntax highlighting with copy-to-clipboard
+- **Docker Support** - Fully containerized for easy deployment
 
 ## Tech Stack
 
@@ -39,7 +39,7 @@ A high-performance, multi-language documentation portal built with Next.js featu
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/docs-portal.git
+git clone https://github.com/nathimike102/multi_language_documentaion-solved-23mh1a05h9.git
 cd docs-portal
 ```
 
@@ -249,8 +249,8 @@ MIT License - see LICENSE file for details
 
 For issues and questions:
 
-- GitHub Issues: [github.com/yourusername/docs-portal/issues](https://github.com/yourusername/docs-portal/issues)
-- Email: support@example.com
+- GitHub Issues: [github.com/nathimike102/multi_language_documentaion-solved-23mh1a05h9/issues](https://github.com/nathimike102/multi_language_documentaion-solved-23mh1a05h9/issues)
+- Email: 23mh1a05h9@acoe.edu.in
 
 ## Acknowledgments
 
@@ -259,5 +259,3 @@ For issues and questions:
 - All open-source contributors
 
 ---
-
-Built with ❤️ using Next.js and React

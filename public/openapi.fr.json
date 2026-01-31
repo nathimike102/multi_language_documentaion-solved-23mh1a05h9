@@ -282,6 +282,13 @@
     "schemas": {
       "User": {
         "type": "object",
+        "description": "User profile record.",
+        "example": {
+          "id": "123",
+          "name": "Jane Doe",
+          "email": "jane@example.com",
+          "createdAt": "2026-01-31T12:00:00Z"
+        },
         "properties": {
           "id": {
             "type": "string",
@@ -304,6 +311,12 @@
       },
       "UserInput": {
         "type": "object",
+        "description": "Payload to create or update a user.",
+        "example": {
+          "name": "Jane Doe",
+          "email": "jane@example.com",
+          "password": "********"
+        },
         "required": ["name", "email"],
         "properties": {
           "name": {
@@ -322,6 +335,14 @@
       },
       "Doc": {
         "type": "object",
+        "description": "Documentation page metadata.",
+        "example": {
+          "slug": "introduction",
+          "title": "Introduction",
+          "description": "Welcome to the Documentation Portal",
+          "version": "v1",
+          "locale": "en"
+        },
         "properties": {
           "slug": {
             "type": "string"
@@ -342,6 +363,13 @@
       },
       "SearchResult": {
         "type": "object",
+        "description": "Search result item.",
+        "example": {
+          "title": "Introduction - v1",
+          "excerpt": "Welcome to the Documentation Portal!",
+          "url": "/docs/v1/introduction",
+          "score": 0.92
+        },
         "properties": {
           "title": {
             "type": "string"
@@ -359,6 +387,13 @@
       },
       "Pagination": {
         "type": "object",
+        "description": "Pagination metadata.",
+        "example": {
+          "page": 1,
+          "limit": 10,
+          "total": 120,
+          "totalPages": 12
+        },
         "properties": {
           "page": {
             "type": "integer"
