@@ -5,13 +5,14 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
+import { getAllDocs } from '@/lib/docs';
 
 const SwaggerUI = dynamic(() => import('swagger-ui-react'), { 
   ssr: false,
   loading: () => <div className="p-8 text-center text-slate-600 dark:text-slate-400">Loading API documentation...</div>
 });
 
-export default function ApiReferencePage() {
+export default function ApiReferencePage({ availableSlugs }) {
   const { t } = useTranslation('common');
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -30,6 +31,7 @@ export default function ApiReferencePage() {
           isOpen={sidebarOpen} 
           currentVersion="api"
           currentSlug="reference"
+          availableSlugs={availableSlugs}
         />
         
         <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'md:ml-72' : 'md:ml-0'}`}>
@@ -387,8 +389,10 @@ export default function ApiReferencePage() {
 }
 
 export async function getStaticProps({ locale }) {
+  const availableSlugs = getAllDocs(locale, 'v3').map((item) => item.slug);
   return {
     props: {
+      availableSlugs,
       ...(await serverSideTranslations(locale, ['common'])),
     },
   };

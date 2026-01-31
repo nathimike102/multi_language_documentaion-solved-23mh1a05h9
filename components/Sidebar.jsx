@@ -19,7 +19,7 @@ const navItems = {
   ],
 };
 
-export default function Sidebar({ isOpen, currentVersion = 'v1', currentSlug }) {
+export default function Sidebar({ isOpen, currentVersion = 'v1', currentSlug, availableSlugs }) {
   const router = useRouter();
   const { t } = useTranslation('common');
   const { locale } = router;
@@ -27,6 +27,9 @@ export default function Sidebar({ isOpen, currentVersion = 'v1', currentSlug }) 
   // For API reference, use v3 navigation items; for doc versions, use the specific version
   const displayVersion = currentVersion === 'api' ? 'v3' : currentVersion;
   const items = navItems[displayVersion] || navItems.v1;
+  const visibleItems = Array.isArray(availableSlugs)
+    ? items.filter((item) => availableSlugs.includes(item.slug))
+    : items;
 
   return (
     <>
@@ -60,7 +63,7 @@ export default function Sidebar({ isOpen, currentVersion = 'v1', currentSlug }) 
               </h3>
             </div>
             <ul className="space-y-1">
-              {items.map((item) => {
+              {visibleItems.map((item) => {
                 const isActive = currentSlug === item.slug;
                 // For API reference, link to v3 docs; for doc versions, link within version
                 const href = currentVersion === 'api' 

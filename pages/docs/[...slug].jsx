@@ -1,18 +1,46 @@
-import { getAllVersionsAndLocales, getDocBySlug, extractHeadings } from '@/lib/docs';
+import { getAllVersionsAndLocales, getDocBySlug, extractHeadings, getAllDocs } from '@/lib/docs';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import DocsLayout from '@/components/DocsLayout';
 import ReactMarkdown from 'react-markdown';
+import React from 'react';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import CodeBlock from '@/components/CodeBlock';
 import FeedbackWidget from '@/components/FeedbackWidget';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-export default function DocPage({ doc, headings, version, slug }) {
-  const { t } = useTranslation('common');
+function extractTextFromNode(node) {
+  if (!node) return '';
+  if (node.type === 'text' && typeof node.value === 'string') {
+    return node.value;
+  }
+  if (Array.isArray(node.children)) {
+    return node.children.map(extractTextFromNode).join('');
+  }
+  return '';
+}
+
+function extractText(children, node) {
+  if (typeof children === 'string') return children;
+
+  if (Array.isArray(children)) {
+    return children.map((child) => extractText(child)).join('');
+  }
+
+  if (React.isValidElement(children)) {
+    return extractText(children.props?.children ?? '');
+  }
+
+  if (children && typeof children === 'object' && 'props' in children) {
+    return extractText(children.props?.children ?? '');
+  }
+
+  return extractTextFromNode(node);
+}
+
+export default function DocPage({ doc, headings, version, slug, availableSlugs }) {
   const router = useRouter();
   
   // Extract version from URL as fallback in case props are not set correctly
@@ -42,7 +70,12 @@ export default function DocPage({ doc, headings, version, slug }) {
   }
 
   return (
-    <DocsLayout headings={headings} currentVersion={finalVersion} currentSlug={finalSlug}>
+    <DocsLayout
+      headings={headings}
+      currentVersion={finalVersion}
+      currentSlug={finalSlug}
+      availableSlugs={availableSlugs}
+    >
       <div data-testid="doc-content" className="markdown-content">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
@@ -50,8 +83,9 @@ export default function DocPage({ doc, headings, version, slug }) {
           components={{
             code({ node, inline, className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || '');
+              const codeText = extractText(children, node).replace(/\n$/, '');
               return !inline && match ? (
-                <CodeBlock language={match[1]} code={String(children).replace(/\n$/, '')} />
+                <CodeBlock language={match[1]} code={codeText} />
               ) : (
                 <code className={className} {...props}>
                   {children}
@@ -78,23 +112,6 @@ export default function DocPage({ doc, headings, version, slug }) {
 
       <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
         <FeedbackWidget />
-      </div>
-
-      <div className="mt-8 flex items-center justify-between text-sm">
-        <a
-          href={`https://github.com/example/repo/blob/main/_docs/${finalVersion}/${finalSlug}.md`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z\" />
-          </svg>
-          {t('common.edit_page')}
-        </a>
-        <span className="text-slate-500 dark:text-slate-500">
-          Last updated: {new Date().toLocaleDateString()}
-        </span>
       </div>
     </DocsLayout>
   );
@@ -130,6 +147,7 @@ export async function getStaticProps({ params, locale }) {
   }
 
   const headings = extractHeadings(doc.content);
+  const availableSlugs = getAllDocs(locale, version).map((item) => item.slug);
 
   return {
     props: {
@@ -137,6 +155,7 @@ export async function getStaticProps({ params, locale }) {
       headings,
       version,
       slug,
+      availableSlugs,
       ...(await serverSideTranslations(locale, ['common'])),
     },
     revalidate: 60, // ISR: Revalidate every 60 seconds

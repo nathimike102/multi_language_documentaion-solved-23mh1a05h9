@@ -3,7 +3,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import TableOfContents from './TableOfContents';
 
-export default function DocsLayout({ children, headings = [], currentVersion, currentSlug }) {
+export default function DocsLayout({ children, headings = [], currentVersion, currentSlug, availableSlugs }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
@@ -15,6 +15,7 @@ export default function DocsLayout({ children, headings = [], currentVersion, cu
           isOpen={sidebarOpen} 
           currentVersion={currentVersion}
           currentSlug={currentSlug}
+          availableSlugs={availableSlugs}
         />
         
         <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'md:ml-72' : 'md:ml-0'}`}>
