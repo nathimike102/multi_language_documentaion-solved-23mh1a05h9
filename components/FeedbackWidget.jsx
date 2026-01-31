@@ -1,24 +1,46 @@
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 export default function FeedbackWidget() {
   const [feedback, setFeedback] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
   const { t } = useTranslation('common');
+  const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (feedback.trim()) {
-      // Client-side confirmation (no backend required)
+
+    if (!feedback.trim()) {
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: feedback.trim(),
+          pageUrl: router.asPath,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send feedback');
+      }
+
       setShowSuccess(true);
       setFeedback('');
       toast.success(t('feedback.thank_you'));
-      
+
       setTimeout(() => {
         setShowSuccess(false);
       }, 3000);
+    } catch (error) {
+      toast.error(t('common.error'));
     }
   };
 
