@@ -48,6 +48,7 @@ npm run dev
 ## Testing
 
 Before submitting:
+
 - Test all language variants (en, es, fr, de)
 - Verify dark mode works correctly
 - Check responsive design on mobile
@@ -56,6 +57,7 @@ Before submitting:
 ## Commit Message Guidelines
 
 Use conventional commits format:
+
 - `feat:` New features
 - `fix:` Bug fixes
 - `docs:` Documentation changes

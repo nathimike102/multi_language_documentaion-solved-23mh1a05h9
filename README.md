@@ -151,6 +151,7 @@ Documentation pages are statically generated at build time and revalidated every
 ### Internationalization
 
 The application supports 4 languages with automatic locale routing:
+
 - `/en/docs/...` - English
 - `/es/docs/...` - Spanish (Español)
 - `/fr/docs/...` - French (Français)
@@ -247,6 +248,7 @@ MIT License - see LICENSE file for details
 ## Support
 
 For issues and questions:
+
 - GitHub Issues: [github.com/yourusername/docs-portal/issues](https://github.com/yourusername/docs-portal/issues)
 - Email: support@example.com
 

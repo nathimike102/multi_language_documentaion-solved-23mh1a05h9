@@ -7,7 +7,7 @@ export default function DocsLayout({ children, headings = [], currentVersion, cu
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
       <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
       
       <div className="flex pt-16">
@@ -17,8 +17,8 @@ export default function DocsLayout({ children, headings = [], currentVersion, cu
           currentSlug={currentSlug}
         />
         
-        <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'md:ml-64' : 'md:ml-0'}`}>
-          <div className="max-w-4xl mx-auto px-4 py-8">
+        <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'md:ml-72' : 'md:ml-0'}`}>
+          <div className="max-w-5xl mx-auto px-6 py-12">
             <div className="lg:flex lg:gap-8">
               <article className="flex-1 min-w-0">
                 {children}

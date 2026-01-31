@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Copy package files
 COPY package.json package-lock.json* ./
-RUN npm ci
+RUN npm install --production=false || npm install
 
 # Stage 2: Builder
 FROM node:20-alpine AS builder
@@ -37,6 +37,9 @@ COPY --from=builder /app/.next/static ./.next/static
 
 # Install curl for healthcheck
 RUN apk add --no-cache curl
+
+# Fix permissions for nextjs user
+RUN chown -R nextjs:nodejs /app
 
 USER nextjs
 
