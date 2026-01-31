@@ -8,10 +8,20 @@ import rehypeRaw from 'rehype-raw';
 import CodeBlock from '@/components/CodeBlock';
 import FeedbackWidget from '@/components/FeedbackWidget';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 export default function DocPage({ doc, headings, version, slug }) {
   const { t } = useTranslation('common');
+  const router = useRouter();
+  
+  // Extract version from URL as fallback in case props are not set correctly
+  const urlVersion = router.query.slug?.[0] || version;
+  const urlSlug = router.query.slug?.slice(1).join('/') || slug;
+  
+  // Use URL-extracted values if they're valid versions, otherwise use props
+  const finalVersion = ['v1', 'v2', 'v3'].includes(urlVersion) ? urlVersion : version;
+  const finalSlug = finalVersion === urlVersion ? urlSlug : slug;
 
   if (!doc) {
     return (
@@ -32,7 +42,7 @@ export default function DocPage({ doc, headings, version, slug }) {
   }
 
   return (
-    <DocsLayout headings={headings} currentVersion={version} currentSlug={slug}>
+    <DocsLayout headings={headings} currentVersion={finalVersion} currentSlug={finalSlug}>
       <div data-testid="doc-content" className="markdown-content">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
@@ -72,7 +82,7 @@ export default function DocPage({ doc, headings, version, slug }) {
 
       <div className="mt-8 flex items-center justify-between text-sm">
         <a
-          href={`https://github.com/example/repo/blob/main/_docs/${version}/${slug}.md`}
+          href={`https://github.com/example/repo/blob/main/_docs/${finalVersion}/${finalSlug}.md`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
