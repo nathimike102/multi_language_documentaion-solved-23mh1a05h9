@@ -15,6 +15,10 @@ export default function ApiReferencePage() {
   const { t } = useTranslation('common');
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  
+  // Get the current locale to load the appropriate OpenAPI file
+  const locale = router.locale || 'en';
+  const openapiUrl = `/openapi.${locale}.json`;
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
@@ -78,7 +82,7 @@ export default function ApiReferencePage() {
                 <div className="bg-slate-50 dark:bg-slate-800 px-6 py-4 border-b border-slate-200 dark:border-slate-700">
                   <h2 className="text-xl font-semibold text-slate-900 dark:text-white">{t('common.api_endpoints')}</h2>
                 </div>
-                <SwaggerUI url="/openapi.json" />
+                <SwaggerUI url={openapiUrl} />
               </div>
             </div>
           </div>
