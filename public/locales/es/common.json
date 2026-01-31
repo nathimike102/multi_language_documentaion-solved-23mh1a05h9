@@ -28,7 +28,13 @@
     "getting_started": "Comenzando",
     "introduction": "Introducción",
     "installation": "Instalación",
-    "configuration": "Configuración"
+    "configuration": "Configuración",
+    "api_description": "Documentación y referencia completa de la API",
+    "base_url": "URL Base",
+    "authentication": "Autenticación",
+    "authentication_desc": "Token Bearer en el encabezado de autorización",
+    "api_endpoints": "Endpoints de API",
+    "advanced_features": "Funciones Avanzadas"
   },
   "feedback": {
     "title": "¿Te resultó útil esta página?",

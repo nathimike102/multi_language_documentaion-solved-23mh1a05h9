@@ -5,17 +5,17 @@ import VersionSelector from './VersionSelector';
 
 const navItems = {
   v1: [
-    { slug: 'introduction', title: 'Introduction' },
-    { slug: 'installation', title: 'Installation' },
-    { slug: 'configuration', title: 'Configuration' },
+    { slug: 'introduction', titleKey: 'common.introduction' },
+    { slug: 'installation', titleKey: 'common.installation' },
+    { slug: 'configuration', titleKey: 'common.configuration' },
   ],
   v2: [
-    { slug: 'introduction', title: 'Introduction' },
-    { slug: 'api-reference', title: 'API Reference' },
+    { slug: 'introduction', titleKey: 'common.introduction' },
+    { slug: 'api-reference', titleKey: 'common.api_reference' },
   ],
   v3: [
-    { slug: 'introduction', title: 'Introduction' },
-    { slug: 'advanced-features', title: 'Advanced Features' },
+    { slug: 'introduction', titleKey: 'common.introduction' },
+    { slug: 'advanced-features', titleKey: 'common.advanced_features' },
   ],
 };
 
@@ -56,7 +56,7 @@ export default function Sidebar({ isOpen, currentVersion = 'v1', currentSlug }) 
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
               <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
-                {currentVersion === 'api' ? 'Documentation' : 'Getting Started'}
+                {currentVersion === 'api' ? t('common.documentation') : t('common.getting_started')}
               </h3>
             </div>
             <ul className="space-y-1">
@@ -81,7 +81,7 @@ export default function Sidebar({ isOpen, currentVersion = 'v1', currentSlug }) 
                       <svg className={`w-4 h-4 ${isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
-                      {item.title}
+                      {t(item.titleKey)}
                     </Link>
                   </li>
                 );
@@ -107,7 +107,7 @@ export default function Sidebar({ isOpen, currentVersion = 'v1', currentSlug }) 
               <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
-              API Reference
+              {t('common.api_reference')}
             </Link>
           </div>
         </nav>

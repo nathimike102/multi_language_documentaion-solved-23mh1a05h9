@@ -28,7 +28,13 @@
     "getting_started": "Erste Schritte",
     "introduction": "Einführung",
     "installation": "Installation",
-    "configuration": "Konfiguration"
+    "configuration": "Konfiguration",
+    "api_description": "Vollständige API-Dokumentation und Referenz",
+    "base_url": "Basis-URL",
+    "authentication": "Authentifizierung",
+    "authentication_desc": "Bearer-Token im Authorization-Header",
+    "api_endpoints": "API-Endpunkte",
+    "advanced_features": "Erweiterte Funktionen"
   },
   "feedback": {
     "title": "War diese Seite hilfreich?",

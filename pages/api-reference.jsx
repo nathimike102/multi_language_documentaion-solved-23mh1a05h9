@@ -44,7 +44,7 @@ export default function ApiReferencePage() {
                       {t('common.api_reference')}
                     </h1>
                     <p className="text-lg text-slate-600 dark:text-slate-400">
-                      {t('common.api_reference') || 'Complete API documentation and reference'}
+                      {t('common.api_description')}
                     </p>
                   </div>
                 </div>
@@ -56,7 +56,7 @@ export default function ApiReferencePage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div>
-                      <h3 className="font-semibold text-slate-900 dark:text-white mb-1">Base URL</h3>
+                      <h3 className="font-semibold text-slate-900 dark:text-white mb-1">{t('common.base_url')}</h3>
                       <code className="text-sm bg-white dark:bg-slate-800 px-2 py-1 rounded border border-slate-200 dark:border-slate-700 break-all">https://api.example.com</code>
                     </div>
                   </div>
@@ -66,8 +66,8 @@ export default function ApiReferencePage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div>
-                      <h3 className="font-semibold text-slate-900 dark:text-white mb-1">Authentication</h3>
-                      <p className="text-sm text-slate-600 dark:text-slate-400">Bearer token in Authorization header</p>
+                      <h3 className="font-semibold text-slate-900 dark:text-white mb-1">{t('common.authentication')}</h3>
+                      <p className="text-sm text-slate-600 dark:text-slate-400">{t('common.authentication_desc')}</p>
                     </div>
                   </div>
                 </div>
@@ -76,7 +76,7 @@ export default function ApiReferencePage() {
               {/* Swagger UI Container */}
               <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg">
                 <div className="bg-slate-50 dark:bg-slate-800 px-6 py-4 border-b border-slate-200 dark:border-slate-700">
-                  <h2 className="text-xl font-semibold text-slate-900 dark:text-white">API Endpoints</h2>
+                  <h2 className="text-xl font-semibold text-slate-900 dark:text-white">{t('common.api_endpoints')}</h2>
                 </div>
                 <SwaggerUI url="/openapi.json" />
               </div>
