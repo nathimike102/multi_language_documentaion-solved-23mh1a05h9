@@ -44,8 +44,8 @@ export default function Sidebar({ isOpen, currentVersion = 'v1', currentSlug }) 
         }`}
       >
         <nav className="p-6 space-y-6">
-          {/* Version Selector */}
-          <VersionSelector currentVersion={currentVersion} />
+          {/* Version Selector - Only show for documentation versions, not for API Reference */}
+          {currentVersion !== 'api' && <VersionSelector currentVersion={currentVersion} />}
 
           {/* Navigation Links */}
           <div>
