@@ -33,6 +33,9 @@ export default function LanguageSwitcher() {
     if (router.pathname.startsWith('/docs/')) {
       const version = router.query.slug?.[0] || 'v1';
       router.push(`/docs/${version}/introduction`, undefined, { locale: langCode });
+    } else if (router.pathname === '/api-reference') {
+      // For API reference, just change locale without changing pathname
+      router.push(router.asPath, undefined, { locale: langCode });
     } else {
       const { pathname, asPath, query } = router;
       router.push({ pathname, query }, asPath, { locale: langCode });

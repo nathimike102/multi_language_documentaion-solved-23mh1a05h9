@@ -2,6 +2,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 
@@ -12,6 +13,7 @@ const SwaggerUI = dynamic(() => import('swagger-ui-react'), {
 
 export default function ApiReferencePage() {
   const { t } = useTranslation('common');
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
@@ -27,34 +29,55 @@ export default function ApiReferencePage() {
         />
         
         <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'md:ml-72' : 'md:ml-0'}`}>
-          <div className="max-w-5xl mx-auto px-6 py-12">
-            <div className="space-y-8">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+          <div className="max-w-6xl mx-auto px-6 py-12">
+            <div className="space-y-10">
+              {/* Header Section */}
+              <div className="border-b border-slate-200 dark:border-slate-700 pb-8">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                     </svg>
                   </div>
-                  <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
-                    {t('common.api_reference')}
-                  </h1>
-                </div>
-                <p className="text-lg text-slate-600 dark:text-slate-300 mb-6">
-                  Complete API documentation
-                </p>
-                <div className="flex items-start gap-4 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl">
-                  <svg className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
                   <div>
-                    <h3 className="font-semibold text-slate-900 dark:text-white mb-1">Base URL</h3>
-                    <code className="text-sm bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">https://api.example.com</code>
+                    <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-2">
+                      {t('common.api_reference')}
+                    </h1>
+                    <p className="text-lg text-slate-600 dark:text-slate-400">
+                      {t('common.api_reference') || 'Complete API documentation and reference'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Info Box */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl">
+                    <svg className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                      <h3 className="font-semibold text-slate-900 dark:text-white mb-1">Base URL</h3>
+                      <code className="text-sm bg-white dark:bg-slate-800 px-2 py-1 rounded border border-slate-200 dark:border-slate-700 break-all">https://api.example.com</code>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl">
+                    <svg className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                      <h3 className="font-semibold text-slate-900 dark:text-white mb-1">Authentication</h3>
+                      <p className="text-sm text-slate-600 dark:text-slate-400">Bearer token in Authorization header</p>
+                    </div>
                   </div>
                 </div>
               </div>
 
+              {/* Swagger UI Container */}
               <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg">
+                <div className="bg-slate-50 dark:bg-slate-800 px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+                  <h2 className="text-xl font-semibold text-slate-900 dark:text-white">API Endpoints</h2>
+                </div>
                 <SwaggerUI url="/openapi.json" />
               </div>
             </div>
